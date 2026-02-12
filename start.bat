@@ -1,0 +1,3 @@
+start cmd /k "cd server && npm run server"
+start cmd /k "cd client && npm run dev"
+echo "Starting Application..."

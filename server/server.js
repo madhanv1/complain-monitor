@@ -1,0 +1,30 @@
+const express = require('express');
+const connectDB = require('./config/db');
+const cors = require('cors');
+require('dotenv').config();
+
+const app = express();
+
+// Set debug flags
+console.log("Environment Config Loaded:");
+console.log("MongoURI:", process.env.MONGO_URI ? "Set (Hidden)" : "Not Set");
+console.log("JWT_SECRET Length:", process.env.JWT_SECRET ? process.env.JWT_SECRET.length : "Not Set");
+
+// Connect Database
+connectDB();
+
+// Init Middleware
+app.use(express.json());
+app.use(cors());
+
+app.get('/', (req, res) => res.send('API Running'));
+
+// Define Routes
+app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/data', require('./routes/data'));
+app.use('/api/rules', require('./routes/rules'));
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
