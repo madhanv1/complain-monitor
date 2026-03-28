@@ -15,7 +15,10 @@ connectDB();
 
 // Init Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true
+}));
 
 app.get('/', (req, res) => res.send('API Running'));
 
@@ -25,10 +28,10 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/data', require('./routes/data'));
 app.use('/api/rules', require('./routes/rules'));
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Port listening removed for Vercel serverless deployment
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, '0.0.0.0', () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
 
 module.exports = app;

@@ -1,13 +1,11 @@
 {
-  "name": "server",
+  "name": "complain-monitor-backend",
   "version": "1.0.0",
-  "description": "Academic Environmental Compliance Monitor Server",
-  "main": "server.js",
+  "description": "Academic Environmental Compliance Monitor Backend for Vercel",
+  "main": "api/index.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "dev": "nodemon server.js",
-    "vercel-start": "node server.js"
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -18,7 +16,9 @@
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
-    "nodemailer": "^8.0.0",
+    "nodemailer": "^8.0.0"
+  },
+  "devDependencies": {
     "nodemon": "^3.0.2"
   }
 }
