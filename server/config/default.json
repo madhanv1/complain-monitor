@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb://localhost:27017/pbll",
+    "mongoURI": "mongodb+srv://madhan_v:maddy123@cluster0.xkl2yuu.mongodb.net/pbll?appName=Cluster0",
     "jwtSecret": "mysecrettoken"
 }
