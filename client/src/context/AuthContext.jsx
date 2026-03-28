@@ -8,6 +8,9 @@ const initialState = {
     user: null
 };
 
+// Set the base URL for the backend API
+axios.defaults.baseURL = 'https://complain-monitor-3myj.vercel.app';
+
 export const AuthContext = createContext(initialState);
 
 const reducer = (state, action) => {
