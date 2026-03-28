@@ -79,7 +79,11 @@ export const AuthProvider = ({ children }) => {
             loadUser(); // Verify token immediately
         } catch (err) {
             console.error(err.response?.data?.errors);
-            alert(err.response?.data?.errors[0]?.msg || 'Login Failed');
+            const errorMsg = err.response?.data?.errors?.[0]?.msg || 
+                           err.response?.data?.msg || 
+                           err.message || 
+                           'Login Failed';
+            alert(errorMsg);
             localStorage.removeItem('token');
             dispatch({ type: 'AUTH_ERROR' });
         }
