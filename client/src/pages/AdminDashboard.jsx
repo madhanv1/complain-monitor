@@ -11,17 +11,17 @@ const AdminDashboard = () => {
 
     const fetchData = async () => {
         try {
-            const d = await axios.get('http://localhost:5000/api/data/all');
+            const d = await axios.get('/api/data/all');
             setData(d.data);
         } catch (e) { console.error(e); }
     };
 
     const fetchUsers = async () => {
-        try { const res = await axios.get('http://localhost:5000/api/users'); setUsers(res.data); } catch (e) { console.error(e); }
+        try { const res = await axios.get('/api/users'); setUsers(res.data); } catch (e) { console.error(e); }
     };
 
     const fetchRules = async () => {
-        try { const res = await axios.get('http://localhost:5000/api/rules'); setRules(res.data); } catch (e) { console.error(e); }
+        try { const res = await axios.get('/api/rules'); setRules(res.data); } catch (e) { console.error(e); }
     };
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const AdminDashboard = () => {
     const handleCreateUser = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/users', newUser);
+            await axios.post('/api/users', newUser);
             alert('✅ User Created Successfully!');
             fetchUsers();
             setNewUser({ name: '', email: '', password: '', role: 'lab', department: '' });
@@ -43,7 +43,7 @@ const AdminDashboard = () => {
     const handleDeleteUser = async (id) => {
         if (!window.confirm('Are you sure you want to delete this user?')) return;
         try {
-            await axios.delete(`http://localhost:5000/api/users/${id}`);
+            await axios.delete(`/api/users/${id}`);
             alert('✅ User Deleted Successfully!');
             fetchUsers();
         } catch (err) { alert('❌ Error deleting user'); }
@@ -51,7 +51,7 @@ const AdminDashboard = () => {
 
     const handleUpdateRule = async (cat, type, threshold, period) => {
         try {
-            await axios.post('http://localhost:5000/api/rules', { category: cat, type, threshold, period });
+            await axios.post('/api/rules', { category: cat, type, threshold, period });
             alert('✅ Rule Updated Successfully!');
             fetchRules();
         } catch (err) { alert('❌ Error updating rule'); }

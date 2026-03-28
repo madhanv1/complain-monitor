@@ -14,7 +14,7 @@ const LabDashboard = () => {
 
     const fetchHistory = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/data/lab-history');
+            const res = await axios.get('/api/data/lab-history');
             setHistory(res.data);
         } catch (err) {
             console.error(err);
@@ -30,7 +30,7 @@ const LabDashboard = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/data/lab', formData);
+            await axios.post('/api/data/lab', formData);
             alert('✅ Data Submitted Successfully!');
             setLastRefresh(Date.now());
             setFormData({ ...formData, chemWaste: '', bioWaste: '', glassWaste: '' });

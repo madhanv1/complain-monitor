@@ -13,7 +13,7 @@ const WaterDashboard = () => {
 
     const fetchHistory = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/data/water-history');
+            const res = await axios.get('/api/data/water-history');
             setHistory(res.data);
         } catch (err) { console.error(err); }
     };
@@ -25,7 +25,7 @@ const WaterDashboard = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/data/water', formData);
+            await axios.post('/api/data/water', formData);
             alert('✅ Data Submitted Successfully!');
             setLastRefresh(Date.now());
             setFormData({ ...formData, reading: '', consumption: '' });

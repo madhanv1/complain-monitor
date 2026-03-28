@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         try {
-            const res = await axios.get('http://localhost:5000/api/auth');
+            const res = await axios.get('/api/auth');
             dispatch({ type: 'USER_LOADED', payload: res.data });
         } catch (err) {
             console.error("Load User Error:", err.response?.status);
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
         const body = JSON.stringify({ email, password });
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login', body, config);
+            const res = await axios.post('/api/auth/login', body, config);
 
             // Set token here
             localStorage.setItem('token', res.data.token);

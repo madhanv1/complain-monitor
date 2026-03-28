@@ -14,7 +14,7 @@ const ElectricityDashboard = () => {
 
     const fetchHistory = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/data/electricity-history');
+            const res = await axios.get('/api/data/electricity-history');
             setHistory(res.data);
         } catch (err) { console.error(err); }
     };
@@ -26,7 +26,7 @@ const ElectricityDashboard = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/data/electricity', formData);
+            await axios.post('/api/data/electricity', formData);
             alert('✅ Data Submitted Successfully!');
             setLastRefresh(Date.now());
             setFormData({ ...formData, reading: '', consumption: '', billingPeriod: '' });
