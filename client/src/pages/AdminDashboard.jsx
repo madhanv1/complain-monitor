@@ -40,6 +40,15 @@ const AdminDashboard = () => {
         } catch (err) { alert('❌ Error creating user'); }
     };
 
+    const handleDeleteUser = async (id) => {
+        if (!window.confirm('Are you sure you want to delete this user?')) return;
+        try {
+            await axios.delete(`http://localhost:5000/api/users/${id}`);
+            alert('✅ User Deleted Successfully!');
+            fetchUsers();
+        } catch (err) { alert('❌ Error deleting user'); }
+    };
+
     const handleUpdateRule = async (cat, type, threshold, period) => {
         try {
             await axios.post('http://localhost:5000/api/rules', { category: cat, type, threshold, period });
@@ -264,6 +273,7 @@ const AdminDashboard = () => {
                                             <th style={styles.th}>Email</th>
                                             <th style={styles.th}>Role</th>
                                             <th style={styles.th}>Department</th>
+                                            <th style={styles.th}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -275,6 +285,13 @@ const AdminDashboard = () => {
                                                     <span style={styles.roleBadge}>{u.role}</span>
                                                 </td>
                                                 <td style={styles.td}>{u.department || '—'}</td>
+                                                <td style={styles.td}>
+                                                    {u.role !== 'admin' && (
+                                                        <button onClick={() => handleDeleteUser(u._id)} style={styles.deleteBtn}>
+                                                            Delete
+                                                        </button>
+                                                    )}
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -414,7 +431,8 @@ const styles = {
     thresholdValue: { fontSize: '1.5rem', fontWeight: '700', color: '#f1f5f9', marginBottom: '0.75rem' },
     updateBtn: { padding: '0.5rem 1rem', fontSize: '0.875rem' },
     emptyState: { padding: '3rem', textAlign: 'center', color: '#64748b' },
-    emptyIcon: { width: '48px', height: '48px', margin: '0 auto 1rem', color: '#475569' }
+    emptyIcon: { width: '48px', height: '48px', margin: '0 auto 1rem', color: '#475569' },
+    deleteBtn: { padding: '0.4rem 0.8rem', fontSize: '0.875rem', color: '#fff', background: '#e11d48', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: '600' }
 };
 
 export default AdminDashboard;
