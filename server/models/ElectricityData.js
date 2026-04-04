@@ -4,6 +4,7 @@ const ElectricityDataSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
+    billingPeriod: { type: String, required: true },
     reading: { type: Number, required: true },
     consumption: { type: Number, required: true },
     status: { type: String, enum: ['Pending', 'Compliant', 'Violation'], default: 'Pending' },

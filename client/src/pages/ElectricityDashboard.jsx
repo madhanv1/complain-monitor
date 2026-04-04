@@ -9,7 +9,8 @@ const ElectricityDashboard = () => {
         reading: '',
         consumption: '',
         billingPeriod: '',
-        date: new Date().toISOString().split('T')[0]
+        startDate: new Date().toISOString().split('T')[0],
+        endDate: new Date().toISOString().split('T')[0]
     });
 
     const fetchHistory = async () => {
@@ -103,7 +104,17 @@ const ElectricityDashboard = () => {
                                     </svg>
                                     Date
                                 </label>
-                                <input type="date" name="date" value={formData.date} onChange={onChange} style={styles.input} required />
+                                <input type="date" name="startDate" value={formData.startDate} onChange={onChange} style={styles.input} required />
+                            </div>
+
+                            <div style={styles.inputGroup}>
+                                <label style={styles.label}>
+                                    <svg style={styles.labelIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    End Date
+                                </label>
+                                <input type="date" name="endDate" value={formData.endDate} onChange={onChange} style={styles.input} required />
                             </div>
 
                             <div style={styles.inputGroup}>
@@ -171,7 +182,9 @@ const ElectricityDashboard = () => {
                                 <tbody>
                                     {history.map((item, index) => (
                                         <tr key={item._id} style={{ ...styles.tableRow, animationDelay: `${index * 0.05}s` }} className="animate-slideIn">
-                                            <td style={styles.td}>{new Date(item.date).toLocaleDateString()}</td>
+                                            <td style={styles.td}>
+                                                {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()}
+                                            </td>
                                             <td style={styles.td}>
                                                 <span style={styles.consumptionValue}>{item.consumption} kWh</span>
                                             </td>

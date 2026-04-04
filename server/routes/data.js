@@ -89,7 +89,7 @@ router.post('/water', auth, async (req, res) => {
 router.post('/electricity', auth, async (req, res) => {
     if (req.user.role !== 'electricity') return res.status(403).json({ msg: 'Access denied' });
     try {
-        const { reading, consumption, startDate, endDate } = req.body;
+        const { reading, consumption, startDate, endDate, billingPeriod } = req.body;
         const check = await checkViolation('electricity', consumption, 'monthly');
         const status = check.isViolation ? 'Violation' : 'Compliant';
         const violationMessage = check.isViolation ? `Monthly limit ${check.threshold} exceeded` : '';
@@ -100,7 +100,7 @@ router.post('/electricity', auth, async (req, res) => {
 
         const newData = new ElectricityData({
             user: req.user.id,
-            startDate, endDate,
+            startDate, endDate, billingPeriod,
             reading, consumption,
             status, violationMessage
         });
